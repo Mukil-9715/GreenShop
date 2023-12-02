@@ -1,0 +1,34 @@
+[
+  {
+    "name": "",
+    "description": {
+      "st_description": "",
+      "lg_description": ""
+    },
+    "image": [""],
+    "price": [""],
+    "categories": "",
+    "size": [""],
+    "tags": [""],
+    "review": {
+      "rating": "",
+      "review": ""
+    }
+  },
+  {
+    "name": "",
+    "description": {
+      "st_description": "",
+      "lg_description": ""
+    },
+    "image": [""],
+    "price": [""],
+    "categories": "",
+    "size": [""],
+    "tags": [""],
+    "review": {
+      "rating": "",
+      "review": ""
+    }
+  }
+]
