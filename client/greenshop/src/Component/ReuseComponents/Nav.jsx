@@ -26,7 +26,7 @@ const Nav = () => {
     </div>
     <Button className="btns-fill">Login </Button>
     </div>
-    <hr />
+    <hr className='mt-0' />
     </div>
   )
 }

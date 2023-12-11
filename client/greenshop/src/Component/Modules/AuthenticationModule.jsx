@@ -1,16 +1,39 @@
 import { Form, Input, Modal } from "antd";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import G from "../../Asset/G_logo.png"
-import F from "../../Asset/f logo.png"
+import G from "../../Asset/G_logo.png";
+import F from "../../Asset/f logo.png";
+import axios from "axios";
 
 const onFinishLogIn = (values) => {
+  
   console.log("Success:", values);
 };
 const onFinishLogInFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 const onFinishSignUp = (values) => {
+  const input = {
+    user:values.username,
+    email:values.email,
+    password:values.password
+  }
+  const postdata = () => {
+    axios
+      .post("http://localhost:8000/api/user", input)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+  if (values.password ===  values.confirmpassword){
+    console.log("ok");
+    postdata();
+  }
+  else {
+    console.log("incorrect password");
+    
+  }
   console.log("Success:", values);
 };
 const onFinishSignUpFailed = (errorInfo) => {
@@ -280,8 +303,18 @@ const AuthenticationModule = () => {
         {rendersignup && <Signup />}
 
         <div className="  d-flex justify-content-center flex-column align-items-center ">
-          <Button className="btns-outline my-4"><span className="pe-2"><img src={G} alt="" width="25px"/></span> LOGIN WITH GOOGLE</Button>
-          <Button className="btns-outline mb-4"><span className="pe-2"><img src={F} alt="" width="15px"/></span>LOGIN WITH FACEBOOK</Button>
+          <Button className="btns-outline my-4">
+            <span className="pe-2">
+              <img src={G} alt="" width="25px" />
+            </span>{" "}
+            LOGIN WITH GOOGLE
+          </Button>
+          <Button className="btns-outline mb-4">
+            <span className="pe-2">
+              <img src={F} alt="" width="15px" />
+            </span>
+            LOGIN WITH FACEBOOK
+          </Button>
         </div>
       </Modal>
     </>

@@ -11,16 +11,7 @@ const description = new Schema({
     required: true,
   },
 });
-const review = new Schema({
-  rating: {
-    type: Number,
-    required: true,
-  },
-  review: {
-    type: String,
-    required: true,
-  },
-});
+
 const cardsSchema = new Schema(
   {
     name: {
@@ -29,12 +20,17 @@ const cardsSchema = new Schema(
     },
     description: description,
     image: {
-        type: [String],
+        type: String,
         default: [],
         required: true,
     },
     price: {
         type: [String],
+        default: [],
+        required: true,
+    },
+    stock: {
+        type: [Number],
         default: [],
         required: true,
     },
@@ -52,8 +48,7 @@ const cardsSchema = new Schema(
         type: [String],
         default: [],
         required: true,
-    },
-    review: review,
+    }
   },
   { timestamp: true }
 );

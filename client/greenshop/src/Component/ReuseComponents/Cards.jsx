@@ -1,11 +1,20 @@
-import React from "react";
 import { Pagination } from 'antd';
-import pic1 from "../../Asset/pic1.png"
-import pic2 from "../../Asset/pic2.png"
-import pic3 from "../../Asset/pic3.png"
-import pic4 from "../../Asset/pic4.png"
+import React, { useContext } from "react";
+import Greenshop from "../../Context Api/Context";
+import { useNavigate } from 'react-router-dom';
+
 
 const Cards = () => {
+
+  const navigate=useNavigate()
+  const { data, setproductdata } = useContext(Greenshop);
+  console.log(data);
+  
+  function singlecard(datas){
+    setproductdata(datas);
+    navigate("/product")
+  }
+  
   return (
     <div className="cardsection w-5">
       <div className="d-flex w-100 justify-content-between ">
@@ -17,67 +26,18 @@ const Cards = () => {
         <div>Sort By : dropdown menu</div>
       </div>
       <div className="d-flex flex-wrap g-5 ">
-        <div className=" mx-4 my-4">
-          <div className="cards-img d-flex justify-content-center align-items-center "><img src={pic1} alt=""  width="200px"/></div>
-          <div>title</div>
+        {data.map((datas)=>{
+          return (
+
+        <div onClick={()=>{singlecard(datas)}} className=" mx-4 my-4">
+          <div className="cards-img d-flex justify-content-center align-items-center "><img src={datas.image} alt=""  width="200px"/></div>
+          <div>{datas.name}</div>
           <div className="d-flex justify-content-between w-50 ">
             <p className="primaryclr fw-bold">$215</p>
             <del>$250</del>
           </div>
         </div>
-        <div className=" mx-4 my-4">
-          <div className="cards-img d-flex justify-content-center align-items-center "><img src={pic2} alt=""  width="200px"/></div>
-          <div>title</div>
-          <div>price</div>
-        </div>
-        <div className=" mx-4 my-4">
-          <div className="cards-img d-flex justify-content-center align-items-center "><img src={pic3} alt=""  width="200px"/></div>
-          <div>title</div>
-          <div>price</div>
-        </div>
-        <div className=" mx-4 my-4">
-          <div className="cards-img d-flex justify-content-center align-items-center "><img src={pic4} alt=""  width="200px"/></div>
-          <div>title</div>
-          <div>price</div>
-        </div>
-        <div className="mx-4 my-4">
-          <div className="cards-img">cards</div>
-          <div>title</div>
-          <div>price</div>
-        </div>
-        <div className=" mx-4 my-4">
-          <div className="cards-img">cards</div>
-          <div>title</div>
-          <div className="d-flex justify-content-between w-50 ">
-            <p className="primaryclr fw-bold">$215</p>
-            <del>$250</del>
-          </div>
-        </div>
-        <div className=" mx-4 my-4">
-          <div className="cards-img">cards</div>
-          <div>title</div>
-          <div className="d-flex justify-content-between w-50 ">
-            <p className="primaryclr fw-bold">$215</p>
-            <del>$250</del>
-          </div>
-        </div>
-        <div className=" mx-4 my-4">
-          <div className="cards-img">cards</div>
-          <div>title</div>
-          <div className="d-flex justify-content-between w-50 ">
-            <p className="primaryclr fw-bold">$215</p>
-            <del>$250</del>
-          </div>
-        </div>
-        <div className=" mx-4 my-4">
-          <div className="cards-img">cards</div>
-          <div>title</div>
-          <div className="d-flex justify-content-between w-50 ">
-            <p className="primaryclr fw-bold">$215</p>
-            <del>$250</del>
-          </div>
-        </div>
-        
+        )})}
       </div>
       <div className="text-end"><Pagination defaultCurrent={1} total={50} /></div>
     </div>
