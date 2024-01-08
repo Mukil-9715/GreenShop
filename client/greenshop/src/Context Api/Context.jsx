@@ -7,6 +7,7 @@ export function Contexts({ children }) {
   const [data, setdata] = useState([]);
   const [productdata, setproductdata] = useState([]);
   const [userdata, setuserdata] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +23,7 @@ export function Contexts({ children }) {
     };
     getData();
   }, []);
-    console.log(userdata);
+  console.log(userdata);
 
   return (
     <Greenshop.Provider
@@ -31,6 +32,9 @@ export function Contexts({ children }) {
         setdata,
         productdata,
         setproductdata,
+        userdata,
+        isModalOpen,
+        setIsModalOpen,
       }}
     >
       {children}

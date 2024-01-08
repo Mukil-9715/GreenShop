@@ -3,10 +3,16 @@ import pic5 from "../../Asset/pic3.png";
 import { Button } from "react-bootstrap";
 import { Rate } from "antd";
 import Greenshop from "../../Context Api/Context";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetail = () => {
   const { productdata } = useContext(Greenshop);
+  const navigate =useNavigate()
   console.log(productdata);
+
+  const handlecart =()=>{
+    navigate("/shoppingcart")
+  }
 
   return (
     <div className="ProductDetail my-4">
@@ -56,7 +62,7 @@ const ProductDetail = () => {
             </div>
             <div>
               <Button className="btns-fill mx-4">BUY NOW</Button>
-              <Button className="btns-outline">ADD TO CART</Button>
+              <Button className="btns-outline" onClick={handlecart} >ADD TO CART</Button>
             </div>
           </div>
           <div>Catagiries and tags</div>

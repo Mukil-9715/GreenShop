@@ -1,9 +1,15 @@
 import { HeartOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { Button } from 'react-bootstrap';
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from "../../Asset/logo.png";
+import Greenshop from '../../Context Api/Context';
 
 const Nav = () => {
+  const { isModalOpen, setIsModalOpen } = useContext(Greenshop);
+  const handlelogin=()=>{
+    setIsModalOpen(true)
+  }
+
   return (
     <div>
     <div className='d-flex align-items-center justify-content-evenly'>
@@ -24,7 +30,7 @@ const Nav = () => {
     <UserOutlined />
     <ShoppingCartOutlined />
     </div>
-    <Button className="btns-fill">Login </Button>
+    <Button className="btns-fill" onClick={handlelogin}>Login </Button>
     </div>
     <hr className='mt-0' />
     </div>

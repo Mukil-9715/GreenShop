@@ -1,23 +1,20 @@
 import { Form, Input, Modal } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import G from "../../Asset/G_logo.png";
 import F from "../../Asset/f logo.png";
 import axios from "axios";
+import Greenshop from "../../Context Api/Context";
 
-const onFinishLogIn = (values) => {
-  
-  console.log("Success:", values);
-};
 const onFinishLogInFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 const onFinishSignUp = (values) => {
   const input = {
-    user:values.username,
-    email:values.email,
-    password:values.password
-  }
+    user: values.username,
+    email: values.email,
+    password: values.password,
+  };
   const postdata = () => {
     axios
       .post("http://localhost:8000/api/user", input)
@@ -26,13 +23,11 @@ const onFinishSignUp = (values) => {
       })
       .catch((err) => console.log(err));
   };
-  if (values.password ===  values.confirmpassword){
+  if (values.password === values.confirmpassword) {
     console.log("ok");
     postdata();
-  }
-  else {
+  } else {
     console.log("incorrect password");
-    
   }
   console.log("Success:", values);
 };
@@ -41,6 +36,32 @@ const onFinishSignUpFailed = (errorInfo) => {
 };
 
 const Login = () => {
+  const { userdata } = useContext(Greenshop);
+
+  console.log(userdata);
+
+  const onFinishLogIn = (values) => {
+    userdata.map((data) => {
+      if (data.user === values.username) {
+        if (data.password === values.password) {
+          console.log("Successfully verified");
+        } else {
+          console.log("Password incorrect");
+        }
+      } else if (data.email === values.username) {
+        if (data.password === values.password) {
+          console.log("Successfully verified");
+        } else {
+          console.log("Password incorrect");
+        }
+      } else {
+        console.log("username or email is incorrect");
+      }
+    });
+
+    console.log("Success:", values);
+  };
+
   return (
     <div className="pt-5">
       <div className="text-center pb-4">
@@ -238,11 +259,13 @@ const Signup = () => {
 };
 
 const AuthenticationModule = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  // const [isModalOpen, setIsModalOpen] = useState(true);
   const [activeLogin, setactivelogin] = useState(true);
   const [activeSignup, setactivesignup] = useState(false);
   const [renderlogin, setrenderlogin] = useState(true);
   const [rendersignup, setRendersignup] = useState(false);
+
+  const { isModalOpen, setIsModalOpen } = useContext(Greenshop);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -253,10 +276,7 @@ const AuthenticationModule = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  function alert() {
-    alert("hello");
-  }
-
+  
   const handleLogInForm = () => {
     setactivelogin(true);
     setactivesignup(false);
