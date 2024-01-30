@@ -1,8 +1,16 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import pic1 from"../../Asset/pic1.png"
+import { useNavigate } from "react-router-dom";
 
 const ProductCart = () => {
+  const navigate=useNavigate()
+  const handleCheckout=()=>{
+    navigate("/checkout")
+  }
+  const handleShopping=()=>{
+    navigate("/")
+  }
   return (
     <div className=" container">
       <div>Home/Shop/Shopping Cart</div>
@@ -94,8 +102,8 @@ const ProductCart = () => {
             <div className="primaryclr fw-bold ">$1616</div>
           </div>
           <div className="text-center">
-            <Button className="btns-fill my-3">PROCESS TO CHECKOUT</Button>
-            <Button className="btns-sizeoutline mb-3">
+            <Button className="btns-fill my-3" onClick={handleCheckout}>PROCESS TO CHECKOUT</Button>
+            <Button className="btns-sizeoutline mb-3" onClick={handleShopping}>
               CONTINOUE SHOPPING
             </Button>
           </div>

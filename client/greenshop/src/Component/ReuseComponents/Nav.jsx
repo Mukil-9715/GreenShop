@@ -3,11 +3,16 @@ import { Button } from 'react-bootstrap';
 import React, { useContext } from 'react';
 import logo from "../../Asset/logo.png";
 import Greenshop from '../../Context Api/Context';
+import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
+  const navigate=useNavigate()
   const { isModalOpen, setIsModalOpen } = useContext(Greenshop);
   const handlelogin=()=>{
     setIsModalOpen(true)
+  }
+  const handleCart=()=>{
+    navigate("/shoppingcart")
   }
 
   return (
@@ -19,7 +24,7 @@ const Nav = () => {
     </div>
     <div className='d-flex align-items-center justify-content-around menus' >
       <Button className='btn-text'>Home</Button>
-      <Button className='btn-text'>Shop</Button>
+      {/* <Button className='btn-text'>Shop</Button> */}
       <Button className='btn-text'>Plant Care</Button>
       <Button className='btn-text'>Blog</Button>
 
@@ -28,7 +33,10 @@ const Nav = () => {
     <SearchOutlined/>  
     <HeartOutlined />
     <UserOutlined />
+    <Button className='btn-text'   onClick={handleCart}>
     <ShoppingCartOutlined />
+
+    </Button>
     </div>
     <Button className="btns-fill" onClick={handlelogin}>Login </Button>
     </div>

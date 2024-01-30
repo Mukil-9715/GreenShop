@@ -5,10 +5,32 @@ const Greenshop = createContext();
 
 export function Contexts({ children }) {
   const [data, setdata] = useState([]);
+  const [uniquedata, setuniquedata] = useState();
   const [productdata, setproductdata] = useState([]);
   const [userdata, setuserdata] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [plant_Id, setplant_Id] = useState("");
 
+  // const handleDelete = (id) => {
+  //   axios
+  //     .delete("http://localhost:8000/api/task/" + id)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setRenderdata(!renderdata);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+  useEffect(() => {
+    const getuniData = async () => {
+      let got = await axios.get("http://localhost:8000/api/cards/" + plant_Id);
+      console.log(plant_Id);
+      console.log(got.data);
+      const unData = JSON.parse(JSON.stringify(got.data));
+      setuniquedata(unData);
+      // setuniquedata(got.data);
+    };
+    getuniData();
+  }, [plant_Id]);
   useEffect(() => {
     const getData = async () => {
       let got = await axios.get("http://localhost:8000/api/cards");
@@ -16,6 +38,8 @@ export function Contexts({ children }) {
     };
     getData();
   }, []);
+  console.log(data);
+
   useEffect(() => {
     const getData = async () => {
       let usersdata = await axios.get("http://localhost:8000/api/user");
@@ -35,6 +59,10 @@ export function Contexts({ children }) {
         userdata,
         isModalOpen,
         setIsModalOpen,
+        uniquedata,
+        setuniquedata,
+        plant_Id,
+        setplant_Id,
       }}
     >
       {children}

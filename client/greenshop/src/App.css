@@ -66,6 +66,11 @@
     background-color: var(--background-color);
     border: none;
   }
+  &&:focus {
+    color: var(--text-black-color);
+    background-color: var(--background-color);
+    border: none;
+  }
 }
 .btns-wtoutline {
   && {
@@ -247,4 +252,15 @@ border-radius: 10px;
   height: 30px;
   border-radius: 15px;
 }
-
+.no-border {
+  &&{border: none;
+    border-radius: 0; 
+    box-shadow: none;
+  } 
+  &&:focus{border: none;
+    border-radius: 0; 
+    box-shadow: none;
+    /* border-color: transparent; */
+    outline: none ;
+  } 
+}

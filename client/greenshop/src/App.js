@@ -12,7 +12,7 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<Landingmodule />}/>
-      <Route path="/product" element={<ProductModule />}/>
+      <Route path="/product/:plant_id" element={<ProductModule />}/>
       <Route path="/shoppingcart" element={<CartsModules />}/>
       <Route path="/checkout" element={<CheckoutModule />}/>
     </Routes>

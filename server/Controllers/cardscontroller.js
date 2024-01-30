@@ -27,4 +27,21 @@ const getallcardsinfo = async (req, res) => {
   }
 };
 
-module.exports = { getallcardsinfo,createcardsinfo };
+const getcardsinfoById = async (req, res) => {
+  const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid Task ID" });
+    }
+
+  try {
+    const singleTask = await cardsmodel.findById(id);
+    if (!singleTask) {
+      return res.status(404).json({ message: "Invalid Task ID" });
+    }
+    res.status(200).json(singleTask);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+module.exports = { getallcardsinfo,createcardsinfo,getcardsinfoById };

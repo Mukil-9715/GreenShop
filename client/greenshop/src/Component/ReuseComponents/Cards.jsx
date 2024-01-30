@@ -1,18 +1,20 @@
 import { Pagination } from 'antd';
 import React, { useContext } from "react";
 import Greenshop from "../../Context Api/Context";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import getPlacements from 'antd/es/_util/placements';
 
 
 const Cards = () => {
 
+  
   const navigate=useNavigate()
   const { data, setproductdata } = useContext(Greenshop);
   console.log(data);
   
   function singlecard(datas){
-    setproductdata(datas);
-    navigate("/product")
+    // setproductdata(datas);
+    navigate("/product/"+datas._id)
   }
   
   return (

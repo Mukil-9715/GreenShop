@@ -1,32 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import pic5 from "../../Asset/pic3.png";
 import { Button } from "react-bootstrap";
 import { Rate } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
 import Greenshop from "../../Context Api/Context";
-import { useNavigate } from "react-router-dom";
 
-const ProductDetail = () => {
-  const { productdata } = useContext(Greenshop);
-  const navigate =useNavigate()
-  console.log(productdata);
+const ProductDetail = ({ uniquedata }) => {
+  const navigate = useNavigate();
+  const [qty, setQty] = useState();
 
-  const handlecart =()=>{
-    navigate("/shoppingcart")
-  }
+  console.log(uniquedata);
+  const handleCart = () => {
+    navigate("/shoppingcart");
+  };
+  const handleBuy = () => {
+    navigate("/checkout");
+  };
 
   return (
     <div className="ProductDetail my-4">
       <div>Home/Shop</div>
       <div className=" my-4 d-flex justify-content-between align-items-center ">
         <div className="cards-img w-50 h-auto d-flex justify-content-center align-items-center">
-          <img src={productdata.image} alt="" width="75%" />
+          <img src={uniquedata.image} alt="" width="75%" />
         </div>
         <div className=" ms-5 w-50">
           <div className="d-flex justify-content-between align-items-end ">
             <div className="">
-              <div className="fs-3 fw-bold">{productdata.name}</div>
+              <div className="fs-3 fw-bold">{uniquedata.name}</div>
               <div className="fs-4 fw-bold primaryclr">
-                {productdata.price[0]}
+                {uniquedata.price[0]}
               </div>
             </div>
             <div className="">
@@ -36,12 +39,12 @@ const ProductDetail = () => {
           <hr className="mt-0" />
           <div>
             <div className="fs-5 fw-bold">Short Description :</div>
-            <div>{productdata.description.st_description}</div>
+            <div>{uniquedata.description.st_description}</div>
           </div>
           <div className="my-3">
             <div className="fs-5 fw-bold ">Size :</div>
             <div className="d-flex w-25  justify-content-between align-items-center">
-              {productdata.size.map((data) => {
+              {uniquedata.size.map((data) => {
                 return (
                   <div className="btns-sizeoutline sizebtn d-flex justify-content-center align-items-center ">
                     {data}
@@ -55,14 +58,33 @@ const ProductDetail = () => {
               <Button className="btns-fill sizebtn d-flex justify-content-center align-items-center ">
                 -
               </Button>
-              <span className="mx-2">1</span>
+              <span className="mx-2">
+                <input
+                  style={{ width: "1.5rem" }}
+                  className="ms-4 no-border"
+                  type="text"
+                  defaultValue="1"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const regex =/^[0-9]*$/;
+                    if (regex.test(value)) {
+                      setQty(e.target.value);
+                    }
+                  }}
+                  value={qty}
+                />
+              </span>
               <Button className="btns-fill sizebtn d-flex justify-content-center align-items-center ">
                 +
               </Button>
             </div>
             <div>
-              <Button className="btns-fill mx-4">BUY NOW</Button>
-              <Button className="btns-outline" onClick={handlecart} >ADD TO CART</Button>
+              <Button className="btns-fill mx-4" onClick={handleBuy}>
+                BUY NOW
+              </Button>
+              <Button className="btns-outline" onClick={handleCart}>
+                ADD TO CART
+              </Button>
             </div>
           </div>
           <div>Catagiries and tags</div>
@@ -74,7 +96,7 @@ const ProductDetail = () => {
           <div>Review</div>
         </div>
         <hr className="mt-0 primaryclr" />
-        <div>{productdata.description.lg_description}</div>
+        <div>{uniquedata.description.lg_description}</div>
       </div>
     </div>
   );
